@@ -21,6 +21,13 @@ type VrouterIntrospectCli struct {
 	progress *bool
 }
 
+func (vip *VrouterIntrospectCli) Init(host string, port int, progress bool) {
+	vip.host = &host
+	vip.port = &port
+	vip.progress = &progress
+
+}
+
 // Flow XML Structures
 
 // FlowStatsRecordsResp struct
@@ -69,7 +76,7 @@ type SandeshFlowKey struct {
 	Protocol uint16 `xml:"protocol"`
 }
 
-func (vip *VrouterIntrospectCli) checkFlows() {
+func (vip *VrouterIntrospectCli) CheckFlows() {
 
 	url := fmt.Sprintf("http://%s:%d/Snh_FlowStatsRecordsReq", *vip.host, *vip.port)
 	resp, err := http.Get(url)
@@ -221,7 +228,7 @@ func main() {
 
 	vip := VrouterIntrospectCli{host: hostPtr, port: portPtr, progress: progressPtr}
 	glog.Infof("Start checking ...")
-	vip.checkFlows()
+	vip.CheckFlows()
 	glog.Flush()
 	glog.Infof("Done")
 }
