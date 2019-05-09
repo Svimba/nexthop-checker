@@ -21,6 +21,7 @@ type VrouterIntrospectCli struct {
 	progress *bool
 }
 
+// Init for VrouterIntrospectCli
 func (vip *VrouterIntrospectCli) Init(host string, port int, progress bool) {
 	vip.host = &host
 	vip.port = &port
@@ -76,6 +77,7 @@ type SandeshFlowKey struct {
 	Protocol uint16 `xml:"protocol"`
 }
 
+// CheckFlows for VrouterIntrospectCli
 func (vip *VrouterIntrospectCli) CheckFlows() {
 
 	url := fmt.Sprintf("http://%s:%d/Snh_FlowStatsRecordsReq", *vip.host, *vip.port)
